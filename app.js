@@ -3,11 +3,23 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const rateLimit = require('express-rate-limit');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config({ path: './.env' });
+
 
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api/api')
 
 var app = express();
+
+// express rate limiter
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many requests from this IP address',
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,6 +30,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+const DB = process.env.DATABASE_URI;
+
+mongoose.connect(DB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then((con) => {
+  console.log('DB connection successful');
+});
 
 app.use('/', indexRouter);
 app.use('/api/', apiRouter); 
