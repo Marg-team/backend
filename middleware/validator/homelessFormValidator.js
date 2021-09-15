@@ -36,6 +36,7 @@ exports.validateHomelessfrom = [
     .bail(),
   check('proof')
     .escape()
+    .optional()
     .custom((value, {req}) => {
         var extension = (path.extname(filename)).toLowerCase();
         switch (extension) {
@@ -54,9 +55,6 @@ exports.validateHomelessfrom = [
     .optional()
     .isObject()
     .withMessage('coordinate must be a object')
-    .bail()
-    .isLatLong()
-    .withMessage('Coordinate does not have lat lon fied')
     .bail(),
   (req, res, next) => {
     const errors = validationResult(req);

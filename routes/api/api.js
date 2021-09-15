@@ -3,6 +3,6 @@ const app = express();
 const homelessfromRouter = require('./homelessformRoute')
 
 
-app.use("/homelessfrom", homelessfromRouter)
+app.use("/homelessform", homelessfromRouter)
 
 module.exports = app;

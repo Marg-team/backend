@@ -4,6 +4,8 @@ const homelessformController = require('../../controller/homelessFormController'
 const { validateHomelessfrom} = require('../../middleware/validator/homelessFormValidator');
   
 
-router.route('/').post(validateHomelessfrom ,homelessformController.submitForm)
+router.route('/').post(validateHomelessfrom ,homelessformController.submitForm);
+router.route('/').get(homelessformController.getAllForm);
+router.route('/:id').get(homelessformController.getForm);
 
 module.exports = router;
