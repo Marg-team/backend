@@ -1,12 +1,12 @@
-const Donation = require('../models/donationModel');
+const anonymousReport = require('../models/anonymousReportModel');
 
 exports.submitForm = async (req, res) => {
     try{
-        const newDonationForm = await Donation.create(req.body);
+        const newAnonymousReport = await anonymousReport.create(req.body);
 
         res.status(201).json({
             status: 'success',
-            donationForm: newDonationForm,
+            anonymousReport: newAnonymousReport,
         });
 
     } catch (err) {
@@ -19,10 +19,10 @@ exports.submitForm = async (req, res) => {
 
 exports.getAllForm = async (req, res) => {
     try{
-        const donations = await Donation.find().populate()
+        const reports = await anonymousReport.find().populate();
         res.status(200).json({
             status: 'success',
-            donationForm: donations,
+            anonymousReport: reports,
         });
     }catch (err) {
         res.status(400).json({
@@ -34,12 +34,12 @@ exports.getAllForm = async (req, res) => {
 
 exports.getForm = async (req, res) => {
     try{
-        const donation = await Donation.findOne({
+        const report = await anonymousReport.findOne({
             _id: req.params.id,
         });
         res.status(200).json({
             status: 'success',
-            donationForm: donation,
+            anonymousReport: report,
         });
     }catch (err) {
         res.status(400).json({
