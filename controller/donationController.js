@@ -1,6 +1,7 @@
 const Donation = require('../models/donationModel');
 
 exports.submitForm = async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*")
     try{
         const newDonationForm = await Donation.create(req.body);
 
