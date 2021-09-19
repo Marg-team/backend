@@ -13,6 +13,7 @@ var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api/api')
 
 var app = express();
+require('./middleware/auth/auth');
 
 app.use(express.json({ limit: '30mb' }));
 
