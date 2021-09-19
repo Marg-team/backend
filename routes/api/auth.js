@@ -30,9 +30,9 @@ router.post(
         async (err, user, info) => {
           try {
             if (err || !user) {
-              const error = new Error('An error occurred.');
-  
-              return next(error);
+              return res.status(500).json({
+                message: info.message
+              })
             }
   
             req.login(
