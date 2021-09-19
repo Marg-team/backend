@@ -1,7 +1,12 @@
 const anonymousReport = require('../models/anonymousReportModel');
+const uploadFile = require('../utils/base64');
 
 exports.submitForm = async (req, res) => {
     try{
+        const v = await uploadFile(req.body.proof)
+        console.log(v)
+        req.body.proof = v;
+        
         const newAnonymousReport = await anonymousReport.create(req.body);
 
         res.status(201).json({
