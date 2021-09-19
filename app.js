@@ -14,6 +14,8 @@ var apiRouter = require('./routes/api/api')
 
 var app = express();
 
+app.use(express.json({ limit: '30mb' }));
+
 // express rate limiter
 const limiter = rateLimit({
   max: 100,
