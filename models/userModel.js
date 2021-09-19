@@ -12,6 +12,14 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    ngoRef: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ngo'
+    },
+    volunteerRef: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'volunteer'
     }
 });
 
