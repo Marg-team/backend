@@ -1,7 +1,17 @@
 const homelessFormModel = require("../models/homelessFormModel");
+const uploadFile = require("../utils/base64");
 
 exports.submitForm = async (req, res) => {
     try{
+
+        if(!!req.body.proof){
+            const v = await uploadFile(req.body.proof)
+            console.log(v)
+            req.body.proof = v;
+        }
+
+        console.log(req.body.proof)
+
         const newhomelessform = await homelessFormModel.create(req.body);
 
         res.status(201).json({
