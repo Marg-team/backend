@@ -1,7 +1,6 @@
 const Donation = require('../models/donationModel');
 
-exports.submitForm = async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*")
+exports.submitForm = async (req, res) => { 
     try{
         const newDonationForm = await Donation.create(req.body);
 
@@ -18,7 +17,7 @@ exports.submitForm = async (req, res) => {
     }
 }
 
-exports.getAllForm = async (req, res) => {
+exports.getAllForm = async (req, res) => { 
     try{
         const donations = await Donation.find().populate()
         res.status(200).json({
