@@ -4,7 +4,7 @@ const anonymousReportSchema = mongoose.Schema({
     situation: {
         type: String,
     },
-    location: {
+    address: {
         type: String,
     },
     coordinate: {
@@ -14,6 +14,9 @@ const anonymousReportSchema = mongoose.Schema({
         lon: {
             type: Number
         }
+    },
+    proof: {
+        type: String
     }
 });
 

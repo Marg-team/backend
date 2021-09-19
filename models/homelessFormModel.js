@@ -14,6 +14,12 @@ const homelessformSchema = mongoose.Schema(
         proof: {
             type: String
         },
+        address: {
+            type: String
+        },
+        desc: {
+            type: String
+        },
         coordinate: {
             lat: {
                 type: Number,
