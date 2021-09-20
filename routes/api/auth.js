@@ -70,7 +70,7 @@ router.post(
                 const body = { _id: user._id, email: user.email };
                 const token = jwt.sign({ user: body }, 'TOP_SECRET');
   
-                return res.json({ token });
+                return res.json({ token, user });
               }
             );
           } catch (error) {
