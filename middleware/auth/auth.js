@@ -14,9 +14,9 @@ passport.use(
         },
         async (email, password, done) => {
         try {
-            const user = await UserModel.create({ email, password });
+            // const user = await UserModel.create({ email, password });
 
-            return done(null, user);
+            return done(null, email, password);
         } catch (error) {
             done(error);
         }

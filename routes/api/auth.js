@@ -1,6 +1,9 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const volunteerModel = require('../../models/volunteerModel');
+const ngoModel = require('../../models/ngoModel');
+const UserModel = require('../../models/userModel');
 const router = express.Router();
 
 
@@ -10,13 +13,36 @@ router.post(
   passport.authenticate('signup', { session: false }),
   async (req, res, next) => {
 
-    const body = { _id: req.user._id, email: req.user.email };
+    const data = req.body;
+
+    let volunteerData;
+    let ngoData;
+
+    if(!!data.pan){
+      //volunteer
+      volunteerData = await volunteerModel.create(data)
+      
+    }else if(!!data.reg){
+      //ngo
+      ngoData = await ngoModel.create(data)
+    }
+
+    const user = await UserModel.create({ 
+      email: data.email, 
+      password: data.password,
+      volunteerRef: volunteerData&&volunteerData._id,
+      ngoRef: ngoData&&ngoData._id
+    });
+
+
+    const body = { _id: user._id, email: user.email };
     const token = jwt.sign({ user: body }, 'TOP_SECRET');
 
     res.json({
       message: 'Signup successful',
-      user: req.user,
-      token: token
+      user: user,
+      token: token,
+
     });
 
   }
