@@ -21,6 +21,18 @@ const donationSchema = mongoose.Schema({
     },
     desc: {
         type: String
+    },
+    accepted: {
+        type: Boolean,
+        default: false
+    },
+    declined: {
+        type: Boolean,
+        default: false
+    },
+    assignedTo: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ngos'
     }
     
 });
