@@ -43,6 +43,45 @@ exports.getAllForm = async (req, res) => {
     }
 }
 
+exports.getAllFormNGO = async (req, res) => {
+    try{
+        const user = await UserModel.findOne({_id:req.user._id}).populate()
+        if(!user){
+            throw new Error("User is not found");
+        }
+        if(!user.ngoRef){
+            throw new Error("User is not an NGO");
+        }
+        const forms = await homelessFormModel.find({assignedTo: user.ngoRef}).populate()
+        res.status(200).json({
+            status: 'success',
+            homelessform: forms,
+        });
+    }catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err,
+        });
+    }
+}
+
+exports.getAllFormVolunteer = async (req, res) => {
+    try{
+        const forms = await homelessFormModel.find({$or:[{status: 0}, {status: null}]}).populate()
+        res.status(200).json({
+            status: 'success',
+            homelessform: forms,
+        });
+    }catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err,
+        });
+    }
+}
+
+
+
 exports.getForm = async (req, res) => {
     try{
         const form = await homelessFormModel.findOne({
@@ -51,6 +90,32 @@ exports.getForm = async (req, res) => {
         res.status(200).json({
             status: 'success',
             homelessform: form,
+        });
+    }catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err,
+        });
+    }
+}
+
+exports.statusChange = async (req, res) => {
+    try{
+        const status = req.params.status;
+        let homelessForm;
+
+        if(status===1){
+            const assignedTo = req.body.assignedTo;
+            if(!assignedTo){
+                new Error('Assigned to is not passed');
+            }
+            homelessForm = await homelessFormModel.updateOne({_id: req.params.id}, {status: 1, assignedTo: assignedTo});
+        }else{
+            homelessForm = await homelessFormModel.updateOne({_id: req.params.id}, {status: status, assignedTo: null});
+        }
+        res.status(201).json({
+            status: 'success',
+            homelessForm: homelessForm,
         });
     }catch (err) {
         res.status(400).json({
