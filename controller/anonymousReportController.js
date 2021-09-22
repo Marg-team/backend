@@ -56,3 +56,30 @@ exports.getForm = async (req, res) => {
         });
     }
 }
+
+
+exports.statusChange = async (req, res) => {
+    try{
+        const status = req.params.status;
+        let donation;
+
+        if(status===1){
+            const assignedTo = req.body.assignedTo;
+            if(!assignedTo){
+                new Error('Assigned to is not passed');
+            }
+            donation = await anonymousReport.updateOne({_id: req.params.id}, {status: 1, assignedTo: assignedTo});
+        }else{
+            donation = await anonymousReport.updateOne({_id: req.params.id}, {status: status, assignedTo: null});
+        }
+        res.status(201).json({
+            status: 'success',
+            donationForm: donation,
+        });
+    }catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err,
+        });
+    }
+}
