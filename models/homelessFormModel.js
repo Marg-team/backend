@@ -35,6 +35,10 @@ const homelessformSchema = mongoose.Schema(
         status: {
             type: Number,
             enum: [-1, 0, 1, 2]
+        },
+        assignedTo: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'ngos'
         }
     },
     {
