@@ -27,6 +27,14 @@ const homelessformSchema = mongoose.Schema(
             lon: {
                 type: Number,
             }
+        },
+        //0: form submitted | or rejected by ngo
+        //1: form accepted and assigned 
+        //2: form work done by ngo
+        //-1: form denied
+        status: {
+            type: Number,
+            enum: [-1, 0, 1, 2]
         }
     },
     {
