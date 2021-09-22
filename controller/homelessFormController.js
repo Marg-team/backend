@@ -1,4 +1,5 @@
 const homelessFormModel = require("../models/homelessFormModel");
+const UserModel = require("../models/userModel");
 const uploadFile = require("../utils/base64");
 
 exports.submitForm = async (req, res) => {
