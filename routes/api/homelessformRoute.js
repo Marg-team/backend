@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const homelessformController = require('../../controller/homelessFormController')
-const { validateHomelessfrom} = require('../../middleware/validator/homelessFormValidator');
-  
+const passport = require('passport')  
 
 router.route('/').post(homelessformController.submitForm);
 router.route('/').get(homelessformController.getAllForm);
