@@ -22,13 +22,13 @@ const donationSchema = mongoose.Schema({
     desc: {
         type: String
     },
-    accepted: {
-        type: Boolean,
-        default: false
-    },
-    declined: {
-        type: Boolean,
-        default: false
+    //0: form submitted | or rejected by ngo
+    //1: form accepted and assigned 
+    //2: form work done by ngo
+    //-1: form denied
+    status: {
+        type: Number,
+        enum: [0, 1, 2, -1]
     },
     assignedTo: {
         type: mongoose.Schema.Types.ObjectId,
