@@ -83,7 +83,7 @@ router.post(
 
 
 router.post(
-  'ngo/isactivated/:id',
+  '/ngo/isactivated/:id',
   passport.authenticate('jwt', { session: false }),
   async (req, res, next) => {
 
