@@ -27,6 +27,10 @@ const ngoSchema = mongoose.Schema({
     activated: {
         type: Boolean,
         default: false
+    },
+    disabled: {
+        type: Boolean,
+        default: false
     }
 });
 
