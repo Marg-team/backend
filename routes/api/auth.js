@@ -79,7 +79,26 @@ router.post(
         }
       )(req, res, next);
     }
-  );
+);
+
+
+router.post(
+  'ngo/isactivated/:id',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res, next) => {
+
+    const ngoId = req.params.id;
+    const ngo = await ngoModel.findOne({_id: ngoId}).populate()
+    let activated = false;
+    if(ngo&&ngo.activated){
+      activated = true;
+    }
+    res.json({
+      active: activated,
+    });
+
+  }
+);
   
 
 module.exports = router;
