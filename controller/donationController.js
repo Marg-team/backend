@@ -91,7 +91,7 @@ exports.getForm = async (req, res) => {
 
 exports.statusChange = async (req, res) => {
     try{
-        const status = req.params.status;
+        const status = +req.params.status;
         let donation;
 
         if(status===1){
