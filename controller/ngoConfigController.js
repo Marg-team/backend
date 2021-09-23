@@ -63,3 +63,18 @@ exports.allPendingNgo = async (req, res) => {
         });
     }
 }
+
+exports.allActivatedNgo = async (req, res) => {
+    try{
+        const ngo = await ngoModel.find({activated: true}).populate();
+        res.status(201).json({
+            status: 'success',
+            deactivatedNgo: ngo,
+        });
+    }catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err,
+        });
+    }
+}
