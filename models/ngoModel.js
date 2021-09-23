@@ -23,6 +23,10 @@ const ngoSchema = mongoose.Schema({
     address: {
         type: String,
         required: true
+    },
+    activated: {
+        type: Boolean,
+        default: false
     }
 });
 
