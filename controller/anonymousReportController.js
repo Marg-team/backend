@@ -5,7 +5,7 @@ exports.submitForm = async (req, res) => {
     try{
 
         if(!!req.body.proof){
-            const v = await uploadFile(req.body.proof)
+            const v = await uploadFile(req.body.proof, req.body.filename)
             console.log(v)
             req.body.proof = v;
         }
