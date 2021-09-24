@@ -27,7 +27,7 @@ exports.submitForm = async (req, res) => {
 
 exports.getAllForm = async (req, res) => {
     try{
-        const reports = await anonymousReport.find().populate();
+        const reports = await anonymousReport.find({status: 0}).populate();
         res.status(200).json({
             status: 'success',
             anonymousReport: reports,
