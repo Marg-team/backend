@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const ngoSchema = mongoose.Schema({
+    ngo: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true
