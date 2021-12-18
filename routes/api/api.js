@@ -15,10 +15,5 @@ app.use('/anonymous-report', anonymousRouter)
 app.use('/auth', authRouter)
 app.use('/ngoConfig', ngoConfigRouter)
 
-// router.get('/', function(req, res, next) {
-//     res.render('index', {title: 'Aashroy API'})
-// });
-
 
 module.exports = app;
-// module.exports = router;
